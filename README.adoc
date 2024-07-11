@@ -1,4 +1,5 @@
 # Example Logbook application on GlassFish 7
+:toc: auto
 
 This example application will log information about HTTP requests and responses into the log file `requests.log` in the `log` directory in the GlassFish domain.
 
@@ -21,17 +22,19 @@ The name of the logger is always `org.zalando.logbook.Logbook`. This applies eve
 
 The level of the logged messages is always `TRACE`.
 
+## Log4j2 configuration
+
 ### Maven dependencies
 
 * log4j-slf4j2-impl
 
-### Log4j2 configuration
+### Log4j2 configuration file
 
 In this example, the configuration is provided via the `log4j2.xml` file in the application (in the classpath).
 
 This file configures the logger `org.zalando.logbook.Logbook` to log messages up to the `trace` level. The messages are logged via the `httpLog` appender into the `requests.log` file.
 
-### JDK logging configuration
+## JDK logging configuration
 
 Instead of using log4j, it's possible to use JDK logging and control the level of the Logbook logger from GlassFish. It's possible to log the Logbook messages into a separate file.
 
@@ -61,7 +64,7 @@ java.util.logging.FileHandler.pattern=${com.sun.aas.instanceRoot}/logs/requests_
 java.util.logging.FileHandler.limit=10000000
 java.util.logging.FileHandler.count=10
 java.util.logging.FileHandler.formatter=java.util.logging.SimpleFormatter
-java.util.logging.SimpleFormatter.format=%1$tY-%1$tm-%1$tdT%1$tH:%1$tM:%1$tS.%1$tL%1$tz\t%4$s\t%5$s%n
+java.util.logging.SimpleFormatter.format=%1$tFT%1$tT%1$tz\t%4$s\t%5$s%6$s%n
 ```
 
 Explanation:
